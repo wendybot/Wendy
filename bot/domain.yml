@@ -30,11 +30,15 @@ actions:
 - action_wind
 - utter_greet2
 - action_weather
+- action_user
 entities:
 - choice
 - type
 - hurricane
 - locale
+- user_sport
+- user_day
+- user_time
 intents:
 - sports
 - greet
@@ -65,12 +69,19 @@ intents:
 - sunrise_sunset
 - how_do_u_know
 - action_temperature
+- preference
 slots:
   choice:
     type: unfeaturized
   locale:
     type: unfeaturized
   type:
+    type: unfeaturized
+  user_sport:
+    type: unfeaturized
+  user_day:
+    type: unfeaturized
+  user_time:
     type: unfeaturized
 templates:
   utter_anything_else:
