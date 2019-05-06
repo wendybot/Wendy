@@ -1,59 +1,8 @@
 from rasa_core_sdk import Action
 from rasa_core_sdk.events import SlotSet
+from .utils import sportsRequest, specificSportRequest, weatherRequest
 import requests
 import json
-
-def sportsRequest(locale):
-    payload = {'place': locale}
-
-    response = requests.get('http://68.183.43.29:30000/sports', params=payload)
-    answer = response.content.decode()
-    answer_json = json.loads(answer)
-    
-    if(len(answer_json["favorable"]) > 0):
-        data_sport = 'Para as condições atuais, recomendo: '
-        for favorable in answer_json["favorable"]:
-            data_sport += '\n' + favorable["name"].capitalize()
-        return data_sport
-    elif(len(answer_json["reservation"]) > 0):
-        data_reservation = 'Caso queira, algumas condições favorecem: '
-        for reservation in answer_json["reservation"]:
-            data_reservation += '\n' + reservation["name"].capitalize()
-        return data_reservation
-    elif(len(answer_json["alert"]) > 0):
-        data_alert = 'Poucas condições favorecem: '
-        for alert in answer_json["alert"]:
-            data_alert += '\n' + alert["name"].capitalize()
-        return data_alert
-
-def weatherRequest(type_, locale):
-    payload = {'place': locale}
-    
-    response = requests.get('http://68.183.43.29:30000/climate', params=payload)
-    answer = response.content.decode()
-    answer_json = json.loads(answer)
-    
-    if((type_ == 'umidade')or(type_ == 'seco')or(type_ == 'úmido')):
-        return 'Neste local, minha umidade é de ' + str(answer_json['humidity']) + '%'
-    
-    elif((type_ == 'ceu')or(type_ == 'chover')or(type_ == 'nebulosidade')):
-        return 'Neste local, apresento ' + answer_json['sky']
-    
-    elif((type_ == 'vento')or(type_ == 'ventando')or(type_ == 'ventos')or(type_ == 'venta')):
-        return 'Neste local, meus ventos sopram para o ' + answer_json["windyDegrees"]+ ' com velocidade de ' +str(answer_json["windySpeed"]) + 'm/s.'
-    
-    elif((type_ == 'sol')or(type_ == 'amanhece')or(type_ == 'escurece')):
-        return 'Neste local, o sol me ilumina de ' + answer_json['sunrise'] + ' às ' + answer_json["sunset"] + '.'
-    
-    elif((type_ == 'pressão')or(type_ == 'pressao')):
-        return 'Neste local, minha pressão é de ' + answer_json['pressure'] + ' atm'
-    
-    elif((type_ == 'temperatura')or(type_ == 'temp')or(type_ == 'graus')):
-        return 'Neste local, minha temperatura é ' + answer_json["temperature"] + '°C'
-    
-    else:
-        return answer
-
 
 class Action_local(Action):
     def name(self):
@@ -62,6 +11,7 @@ class Action_local(Action):
     def run(self, dispatcher, tracker, domain):
         intent = tracker.latest_message['intent'].get('name')
         locale = tracker.get_slot('locale')
+        sport = tracker.get_slot('sport')
         type_ = tracker.get_slot('type')
         
         payload = {'address': locale}
@@ -88,6 +38,8 @@ class Action_local(Action):
             else:
                 if(intent == 'sports'):
                     data_message = sportsRequest(locale)
+                elif(intent == 'specific_sport'):
+                    data_message = specificSportRequest(locale, sport)
                 else:
                     data_message = weatherRequest(type_, locale)
                 

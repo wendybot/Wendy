@@ -18,3 +18,14 @@
 - Me fala um esporte pra [brasilia](locale)
 - Me fala um esporte pra [Nova Iorque Brasil](locale)
 - Me diz um esporte pra fazer me [brasilia](locale)
+
+## intent: specific_sport
+- Posso praticar [windsurf](sport) no [lago paranoa](locale)?
+- dá para fazer [kindsurf](sport) em [hibiscus](locale)?
+- consigo praticar [stand up paddle](sport) na [praia do rosa](locale)?
+- é possivel praticar [surf](sport) em [itapimirim](locale)?
+- posso fazer [vela](sport) em [guarujá](locale)?
+- é possivel fazer [stand up paddle](sport) no [lago corumba](locale)?
+- dá para praticar [surf](sport) em [sao paulo](locale)?
+- teria como eu praticar [surf](sport) em [nova iorque](locale)?
+- o clima tá bom pra fazer [windsurf](sport) em [brasilia](locale)?

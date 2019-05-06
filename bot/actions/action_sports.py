@@ -1,26 +1,18 @@
 from rasa_core_sdk import Action
 from rasa_core_sdk.events import SlotSet
+from .utils import localRequest
 import requests
 import random
 import json
-
-def localRequest(choice, locale):
-
-    payload = {'address': locale}
-    response = requests.get('http://68.183.43.29:31170/listLocales', params=payload)
-    answer = response.content.decode()
-    answer_json = json.loads(answer)
-
-    return answer_json[int(choice) - 1]['name']
 
 class Action_sports(Action):
     def name(self):
         return "action_sports"
 
     def run(self, dispatcher, tracker, domain):
-        choice = tracker.get_slot('choice')
         locale = tracker.get_slot('locale')
-        location = localRequest(choice, locale)
+        choice = tracker.get_slot('choice')
+        location = localRequest(locale, choice)
         payload = {'place': location}
         response = requests.get('http://68.183.43.29:30000/sports', params=payload)
         content = response.content.decode()

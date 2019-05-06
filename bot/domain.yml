@@ -1,48 +1,53 @@
 %YAML 1.1
 ---
 actions:
-- utter_user_error
+- action_wind
 - utter_good_afternoon
+- action_temperature
+- utter_change_subject
+- action_sunrise_sunset
+- utter_greet1
+- utter_greet
+- action_pressure
 - utter_good_morning
+- utter_greet2
+- utter_user_error
+- utter_goodbye
+- utter_hurricane
+- action_humidity
+- action_sports
+- utter_help
 - utter_compliments
-- utter_good_night
+- action_specific_sport
+- utter_who_are_u
+- utter_anything_else
 - utter_out_of_scope
 - utter_how_are_u
-- utter_hurricane
-- action_local
-- utter_change_subject
-- utter_greet
-- utter_greet1
-- action_sports
-- utter_goodbye
-- action_pressure
-- utter_help
-- utter_gaia_error
-- action_sky
-- utter_who_are_u
-- utter_how_do_u_know
-- utter_anything_else
-- utter_default
-- action_humidity
-- action_sunrise_sunset
-- action_temperature
-- utter_elaborate
-- action_wind
-- utter_greet2
 - action_weather
 - action_user
+- utter_elaborate
+- action_local
+- utter_default
+- action_sky
+- utter_good_night
+- utter_how_do_u_know
+- utter_gaia_error
 entities:
-- choice
+- locale
 - type
 - hurricane
 - locale
 - user_sport
 - user_day
 - user_time
+- sport
+- choice
 intents:
+- inform
+- choose
 - sports
 - greet
-- choose
+- specific_sport
 - goodbye
 - sky
 - humidity
@@ -56,7 +61,6 @@ intents:
 - change_subject
 - how_are_u
 - compliments
-- inform
 - hurricane
 - elaborate
 - locale
@@ -74,6 +78,8 @@ slots:
   choice:
     type: unfeaturized
   locale:
+    type: unfeaturized
+  sport:
     type: unfeaturized
   type:
     type: unfeaturized
