@@ -125,3 +125,15 @@
     - slot{"choice": "3"}
     - action_weather
 
+## Generated Story -7986410108494354292
+* greet
+    - utter_greet
+    - utter_greet1
+    - utter_greet2
+* preference{"sport": "Surf", "user_day": "quarta", "user_time": "16h", "locale": "Pernambuco"}
+    - slot{"locale": "Pernambuco"}
+    - slot{"sport": "Surf"}
+    - slot{"user_day": "quarta"}
+    - slot{"user_time": "16h"}
+    - action_user
+

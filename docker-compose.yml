@@ -12,6 +12,7 @@ services:
         - TELEGRAM_BOT_USERNAME=${TELEGRAM_BOT_USERNAME}
         - TELEGRAM_WEBHOOK=${TELEGRAM_WEBHOOK}
         - ENDPOINT_ACTIONS=http://actions:5055/webhook
+        - IP_ADDRESS=${IP_ADDRESS}
       ports:
         - 5001:5001
       depends_on:
