@@ -1,5 +1,5 @@
 rasa-core==0.13.1
 rasa-nlu==0.14.1
 sklearn-crfsuite==0.3.6
-nltk==3.3
+nltk==3.4.5
 flake8==3.7.7
